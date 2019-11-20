@@ -1,11 +1,16 @@
 '''
-author: Levi
-purpose: for update lambda function runtime
+Author: Levi
+Purpose: for update lambda function runtime
+ToRun:
+    $ python update-function-runtime.py <profile-name>
+    $ # example
+    $ python update-function-runtime.py dev-account
 '''
 
 import boto3
 from boto3.session import Session 
 from pprint import pprint as pp
+from sys import argv
 
 class Lambda:
 
@@ -40,7 +45,8 @@ class Lambda:
         print(response)
 
 if __name__ == '__main__':
-    session = Session(profile_name='<profile-name-here>')
+    profile = argv[1]
+    session = Session(profile_name=profile)
     lbd = Lambda(session)
     lists_functions = list(lbd.list_functions())
 
