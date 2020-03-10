@@ -40,14 +40,18 @@ class Lambda:
     def update_function_config(self, function_name):
         response = self.__api.update_function_configuration(
             FunctionName=function_name,
-            Runtime='nodejs12.x'
+            Runtime='nodejs12.x',
+            TracingConfig={
+                'Mode': 'PassThrough'
+            }
         )
         print(response)
 
 if __name__ == '__main__':
-    profile = argv[1]
-    session = Session(profile_name=profile)
-    lbd = Lambda(session)
+    # profile = argv[1]
+    # session = Session(profile_name=profile)
+    # lbd = Lambda(session)
+    lbd = Lambda()
     lists_functions = list(lbd.list_functions())
 
     for list_fns in lists_functions:
